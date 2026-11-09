@@ -1,11 +1,127 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bolívar Eco-Calculator</title>
 </head>
 <body>
+
     <h1>Bolívar Eco-Calculator</h1>
+    <p>Calcula tu impacto ambiental semanal según tus hábitos diarios.</p>
+
+    <form id="ecoForm">
+
+        <label for="transport">Medio de transporte:</label>
+        <select id="transport" required>
+            <option value="">Selecciona una opción</option>
+            <option value="bus">Bus</option>
+            <option value="private">Carro privado</option>
+            <option value="shared">Carro compartido</option>
+            <option value="active">Bicicleta/Caminando</option>
+        </select>
+
+        <br><br>
+
+        <label for="paper">Hojas de papel utilizadas al día:</label>
+        <input type="number" id="paper" min="0" step="1" required>
+
+        <br><br>
+
+        <label for="recycling">Nivel de reciclaje:</label>
+        <select id="recycling" required>
+            <option value="">Selecciona una opción</option>
+            <option value="low">Bajo</option>
+            <option value="medium">Medio</option>
+            <option value="high">Alto</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Calcular</button>
+
+    </form>
+
+    <section id="results" hidden>
+        <h2>Resultados semanales</h2>
+        <p id="co2Result"></p>
+        <p id="pointsResult"></p>
+    </section>
+
+    <script>
+        const ecoForm = document.getElementById("ecoForm");
+
+        ecoForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Obtener los datos del formulario
+            const transport = document.getElementById("transport").value;
+            const paper = Number(document.getElementById("paper").value);
+            const recycling = document.getElementById("recycling").value;
+
+            // Validar los datos
+            if (!transport || !recycling || document.getElementById("paper").value === "" || !Number.isInteger(paper) || paper < 0) {
+                alert("Por favor, completa todos los campos correctamente.");
+                return;
+            }
+
+            // Factores estimados de emisión de CO2 por día
+            const transportEmissions = {
+                bus: 1.2,
+                private: 3.5,
+                shared: 1.8,
+                active: 0
+            };
+
+            const paperEmission = 0.005; // kg de CO2 por hoja
+
+            // Calcular emisiones semanales (5 días)
+            const weeklyTransportCO2 = transportEmissions[transport] * 5;
+            const weeklyPaperCO2 = paper * paperEmission * 5;
+            const totalCO2 = weeklyTransportCO2 + weeklyPaperCO2;
+
+            // Calcular Eco-Points
+            let ecoPoints = 0;
+
+            // Puntos por transporte
+            const transportPoints = {
+                bus: 20,
+                private: 5,
+                shared: 15,
+                active: 30
+            };
+
+            ecoPoints += transportPoints[transport];
+
+            // Puntos por consumo de papel
+            if (paper <= 5) {
+                ecoPoints += 30;
+            } else if (paper <= 10) {
+                ecoPoints += 20;
+            } else if (paper <= 20) {
+                ecoPoints += 10;
+            }
+
+            // Puntos por reciclaje
+            const recyclingPoints = {
+                low: 5,
+                medium: 15,
+                high: 30
+            };
+
+            ecoPoints += recyclingPoints[recycling];
+
+            // Mostrar resultados
+            document.getElementById("co2Result").textContent =
+                "CO2 estimado por semana: " + totalCO2.toFixed(2) + " kg";
+
+            document.getElementById("pointsResult").textContent =
+                "Puntaje Eco-Points: " + ecoPoints + " puntos";
+
+            document.getElementById("results").hidden = false;
+        });
+    </script>
+
 </body>
 </html>
