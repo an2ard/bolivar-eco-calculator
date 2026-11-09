@@ -1,0 +1,325 @@
+
+/* GENERAL SETTINGS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0f7f2;
+    color: #183d2b;
+    min-height: 100vh;
+    padding: 35px 20px;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+}
+
+/* LANGUAGE SELECTOR */
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.language-selector {
+    padding: 10px 14px;
+    border: 1px solid #d6e7db;
+    border-radius: 10px;
+    background: white;
+    color: #176b45;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* HEADER */
+
+header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #176b45;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #668274;
+    font-size: 16px;
+}
+
+/* CARDS */
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(31, 94, 62, 0.07);
+    margin-bottom: 22px;
+}
+
+.card h2 {
+    font-size: 21px;
+    margin-bottom: 24px;
+    color: #176b45;
+}
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d6e7db;
+    border-radius: 11px;
+    background: #f9fcfa;
+    font-family: inherit;
+    font-size: 15px;
+    color: #244b35;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: #229765;
+    box-shadow: 0 0 0 3px rgba(34, 151, 101, 0.12);
+}
+
+/* BUTTONS */
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #168451;
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #106b40;
+    transform: translateY(-2px);
+}
+
+.print-button {
+    margin-top: 22px;
+    background: #245d43;
+}
+
+.print-button:hover {
+    background: #194832;
+}
+
+/* RESULTS */
+
+#results {
+    display: none;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.result-box {
+    background: #eff8f1;
+    border: 1px solid #d8ecdd;
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.result-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.result-box h3 {
+    font-size: 14px;
+    color: #64816f;
+    margin-bottom: 10px;
+}
+
+.result-value {
+    font-size: 27px;
+    font-weight: 800;
+    color: #168451;
+}
+
+.result-description {
+    font-size: 12px;
+    color: #789182;
+    margin-top: 7px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: #8ba394;
+    font-size: 12px;
+    margin-top: 30px;
+}
+
+/* CERTIFICATE - HIDDEN ON SCREEN */
+
+#certificate {
+    display: none;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 25px 14px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* PRINT SETTINGS */
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 20mm;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+        color: #183d2b;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #certificate,
+    #certificate * {
+        visibility: visible;
+    }
+
+    #certificate {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 35px;
+        border: 3px solid #168451;
+        border-radius: 15px;
+        text-align: center;
+        background: white;
+    }
+
+    .certificate-icon {
+        font-size: 45px;
+        margin-bottom: 15px;
+    }
+
+    .certificate-title {
+        font-size: 30px;
+        color: #176b45;
+        margin-bottom: 10px;
+    }
+
+    .certificate-subtitle {
+        color: #668274;
+        margin-bottom: 35px;
+    }
+
+    .certificate-heading {
+        font-size: 22px;
+        margin-bottom: 20px;
+        color: #176b45;
+    }
+
+    .certificate-results {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin: 25px 0;
+    }
+
+    .certificate-box {
+        background: #eff8f1 !important;
+        padding: 25px 10px;
+        border-radius: 12px;
+        border: 1px solid #d8ecdd;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .certificate-box h3 {
+        font-size: 13px;
+        color: #64816f;
+        margin-bottom: 12px;
+    }
+
+    .certificate-value {
+        font-size: 25px;
+        font-weight: 800;
+        color: #168451;
+    }
+
+    .certificate-message {
+        margin-top: 25px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .certificate-footer {
+        margin-top: 55px;
+        padding-top: 15px;
+        border-top: 1px solid #d8ecdd;
+        color: #668274;
+        font-size: 12px;
+    }
+}
